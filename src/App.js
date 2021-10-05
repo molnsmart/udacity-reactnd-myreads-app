@@ -1,7 +1,6 @@
 import React from 'react'
-import * as BooksAPI from './BooksAPI'
 import './App.css'
-import BookListComponent from './components/BookListComponent'
+import BookLibraryComponent from './components/BookLibraryComponent'
 
 class BooksApp extends React.Component {
 
@@ -14,26 +13,7 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    currentlyReading: undefined,
-    wantToRead: undefined,
-    read: undefined
   }
-  componentDidMount() {
-    BooksAPI.getAll()
-      .then(res => {
-        console.log(res)
-        this.setState(
-          {
-            currentlyReading: res.filter(b => b.shelf === 'currentlyReading'),
-            wantToRead: res.filter(b => b.shelf === 'wantToRead'),
-            read: res.filter(b => b.shelf === 'read')
-          }
-        )
-      })
-
-  }
-
-
   render() {
     return (
       <div className="app">
@@ -59,21 +39,7 @@ class BooksApp extends React.Component {
             </div>
           </div>
         ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <BookListComponent BookList={this.state.currentlyReading} Title="Currently Reading"></BookListComponent>
-                <BookListComponent BookList={this.state.wantToRead} Title="Want To Read"></BookListComponent>
-                <BookListComponent BookList={this.state.read} Title="Read"></BookListComponent>
-              </div>
-            </div>
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
-            </div>
-          </div>
+          <BookLibraryComponent></BookLibraryComponent>
         )}
       </div>
     )
