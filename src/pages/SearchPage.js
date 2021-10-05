@@ -42,7 +42,6 @@ class SearchPage extends React.Component {
           this.setState(
             {
               allBooks: allBooks,
-              query: this.state.searchQuery,
               searchResult: mergedList,
               searchResultEmpty: false
             }
@@ -79,7 +78,6 @@ class SearchPage extends React.Component {
           var mergedList = this.mergeResultWithAllBooks(res)
           this.setState(
             {
-              allBooks: this.state.allBooks,
               query: searchQuery,
               searchResult: mergedList,
               searchResultEmpty: false
@@ -88,7 +86,6 @@ class SearchPage extends React.Component {
         } else {
           this.setState(
             {
-              allBooks: this.state.allBooks,
               query: searchQuery,
               searchResult: undefined,
               searchResultEmpty: true
