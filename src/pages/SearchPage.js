@@ -4,9 +4,23 @@ import * as BooksApi from '../BooksAPI'
 import BookListComponent from '../components/BookListComponent'
 class SearchPage extends React.Component {
   state = {
+    allBooks: undefined,
     query: "",
     searchResult: undefined,
     searchResultEmpty: false
+  }
+  componentDidMount() {
+    BooksApi.getAll()
+      .then(res => {
+        this.setState(
+          {
+            allBooks: res,
+            query: "",
+            searchResult: undefined,
+            searchResultEmpty: false
+          }
+        )
+      })
   }
 
   searchHandler = (event) => {
@@ -21,28 +35,60 @@ class SearchPage extends React.Component {
     BooksApi.update(bookToUpdate, newShelf)
       .then(res => {
         // Todo: Implement toast/dialog indicated book was added/removed from lists.
-      }
-      ).catch(error => {
+        if (newShelf === 'none') {
+          // Remove book from all Lists.
+          let allBooks = this.state.allBooks.filter(x => x.id !== bookToUpdate.id)
+          let mergedList = this.state.mergedList.filter(x => x.id !== bookToUpdate.id)
+          this.setState(
+            {
+              allBooks: allBooks,
+              query: this.state.searchQuery,
+              searchResult: mergedList,
+              searchResultEmpty: false
+            }
+          )
+        } else {
+          // Update all lists
+
+          let allBooks = [...this.state.allBooks];
+          if (allBooks.filter(b => b.id === bookToUpdate.id)[0] !== undefined) {
+            allBooks.filter(b => b.id === bookToUpdate.id)[0].shelf = newShelf
+          }
+          this.setState(
+            {
+              allBooks: allBooks,
+
+            }
+          )
+          let mergedList = this.mergeResultWithAllBooks(this.state.searchResult)
+          this.setState(
+            {
+              mergedList: mergedList
+            }
+          )
+        }
+      }).catch(error => {
         console.log("API Error response")
         console.log(error)
       })
-
-
   }
   queryBookApi(searchQuery) {
     BooksApi.search(searchQuery)
       .then(res => {
         if (res.error !== 'empty query') {
+          var mergedList = this.mergeResultWithAllBooks(res)
           this.setState(
             {
+              allBooks: this.state.allBooks,
               query: searchQuery,
-              searchResult: res,
+              searchResult: mergedList,
               searchResultEmpty: false
             }
           )
         } else {
           this.setState(
             {
+              allBooks: this.state.allBooks,
               query: searchQuery,
               searchResult: undefined,
               searchResultEmpty: true
@@ -53,6 +99,18 @@ class SearchPage extends React.Component {
         console.log("API Error response")
         console.log(error)
       })
+  }
+
+  mergeResultWithAllBooks(res) {
+    let newBookList = []
+    res.forEach((element, index) => {
+      if (this.state.allBooks.filter(b => b.id === res[index].id)[0] !== undefined) {
+        newBookList.push(this.state.allBooks.filter(b => b.id === res[index].id)[0])
+      } else {
+        newBookList.push(res[index])
+      }
+    });
+    return newBookList
   }
   render() {
     if (this.state.searchResultEmpty) {

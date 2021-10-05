@@ -6,7 +6,6 @@ import NotFound from './pages/404'
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch
 } from "react-router-dom";
 
