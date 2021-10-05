@@ -2,24 +2,35 @@ import React from 'react'
 import './App.css'
 import BookLibraryComponent from './components/BookLibraryComponent'
 import SearchPage from './pages/SearchPage'
-import { Link, Route } from 'react-router-dom'
+import NotFound from './pages/404'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
+} from "react-router-dom";
 
 class BooksApp extends React.Component {
 
   render() {
     return (
       <div className="app">
-        <Route exact path="/" render={() => (
+        <Router>
           <div>
-            <BookLibraryComponent></BookLibraryComponent>
-            <Link to="/search">Search</Link>
+            <Switch>
+              <Route exact path="/">
+                <BookLibraryComponent></BookLibraryComponent>
+                <Link to="/search">Search</Link>
+              </Route>
+              <Route exact path="/search">
+                <SearchPage></SearchPage>
+              </Route>
+              <Route path="*">
+                <NotFound />
+              </Route>
+            </Switch>
           </div>
-        )}>
-        </Route>
-        <Route exact path="/search" render={() => (
-          <SearchPage></SearchPage>
-        )}>
-        </Route>
+        </Router>
       </div >
     )
   }
