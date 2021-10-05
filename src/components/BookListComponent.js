@@ -8,6 +8,11 @@ function BookListComponent(props) {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {props.BookList.map(function (book, i,) {
+              if (book.imageLinks === undefined) {
+                book.imageLinks = {
+                  thumbnail: "http://i.imgur.com/sJ3CT4V.gif"
+                }
+              }
               return <BookComponent key={i} Title={book.title} Id={book.id} Shelf={book.shelf} Cover={book.imageLinks.thumbnail} ShelfHandler={props.ShelfHandler}></BookComponent>
             })}
           </ol>
