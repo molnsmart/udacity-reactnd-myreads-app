@@ -1,10 +1,18 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
-class SearchPage extends React.Component {
+class NotFound extends React.Component {
 
   render() {
-    return <p>Page not found</p>
+    return (
+      <div>
+        <h3 className="text-center pt-5">Page not found</h3>
+        <p className="text-center">
+          <Link to="/">Go to Myreads app</Link>
+        </p>
+      </div>
+    )
   }
 }
 
-export default SearchPage
+export default NotFound

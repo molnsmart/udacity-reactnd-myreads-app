@@ -5,17 +5,16 @@ import { Link } from 'react-router-dom'
 
 class BookLibraryComponent extends React.Component {
 
-
   state = {
     allBooks: undefined,
     currentlyReading: undefined,
     wantToRead: undefined,
     read: undefined
   }
+
   componentDidMount() {
     BooksAPI.getAll()
       .then(res => {
-        console.log(res)
         this.setState(
           {
             allBooks: res,
@@ -26,6 +25,7 @@ class BookLibraryComponent extends React.Component {
         )
       })
   }
+
   updateShelfHandler = (event) => {
 
     let bookToUpdate = this.state.allBooks.filter(book => book.id === event.target.name)[0]
@@ -57,7 +57,6 @@ class BookLibraryComponent extends React.Component {
             }
           )
         }
-
       }
       )
   }
@@ -83,7 +82,6 @@ class BookLibraryComponent extends React.Component {
           </div>
         </div>
       </div>
-
     )
   }
 }
