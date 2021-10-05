@@ -8,7 +8,10 @@ function BookListComponent(props) {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {props.BookList.map(function (book, i,) {
+
               if (book.imageLinks === undefined) {
+                // Some books from API Search is missing tumbnails (SearchTerm: b). Causes error on page.
+                // Add a standard tumbnail to those books, this prevents the Error.
                 book.imageLinks = {
                   thumbnail: "http://i.imgur.com/sJ3CT4V.gif"
                 }

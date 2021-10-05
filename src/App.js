@@ -20,7 +20,6 @@ class BooksApp extends React.Component {
             <Switch>
               <Route exact path="/">
                 <BookLibraryComponent></BookLibraryComponent>
-                <Link to="/search">Search</Link>
               </Route>
               <Route exact path="/search">
                 <SearchPage></SearchPage>
@@ -31,7 +30,7 @@ class BooksApp extends React.Component {
             </Switch>
           </div>
         </Router>
-      </div >
+      </div>
     )
   }
 }
