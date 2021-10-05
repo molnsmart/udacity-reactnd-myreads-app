@@ -9,6 +9,14 @@ body {
 body, .app {
   background: white;
 }
+.text-center {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+.pt-5{
+  padding-top: 24px;
+}
 
 /* main page */
 
