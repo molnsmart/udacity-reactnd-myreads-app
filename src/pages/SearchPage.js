@@ -33,7 +33,6 @@ class SearchPage extends React.Component {
     BooksApi.search(searchQuery)
       .then(res => {
         if (res.error !== 'empty query') {
-          console.log(res)
           this.setState(
             {
               query: searchQuery,
