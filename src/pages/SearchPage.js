@@ -16,27 +16,24 @@ class SearchPage extends React.Component {
   }
   updateShelfHandler = (event) => {
 
-
     let bookToUpdate = this.state.searchResult.filter(book => book.id === event.target.name)[0]
     let newShelf = event.target.value
-    if (newShelf !== 'none') {
+    BooksApi.update(bookToUpdate, newShelf)
+      .then(res => {
+        // Todo: Implement toast/dialog indicated book was added/removed from lists.
+      }
+      ).catch(error => {
+        console.log("API Error response")
+        console.log(error)
+      })
 
-      BooksApi.update(bookToUpdate, newShelf)
-        .then(res => {
-          console.log(res)
-        }
-        )
-    } else {
-      console.log("Option 'None' is not implemented")
-    }
 
   }
   queryBookApi(searchQuery) {
     BooksApi.search(searchQuery)
       .then(res => {
-        console.log(res)
-        console.log(res.error)
         if (res.error !== 'empty query') {
+          console.log(res)
           this.setState(
             {
               query: searchQuery,
@@ -53,10 +50,9 @@ class SearchPage extends React.Component {
             }
           )
         }
-
-
       }).catch(error => {
-        console.log("Hello")
+        console.log("API Error response")
+        console.log(error)
       })
   }
   render() {
@@ -70,9 +66,6 @@ class SearchPage extends React.Component {
                 <input type="text" placeholder="Search by title or author" onChange={this.searchHandler} />
               </div>
             </div>
-            {
-
-            }
             <div className="search-books-results">
               <p>Found no books with searchTerm: '{this.state.query}' </p>
             </div>
@@ -89,17 +82,12 @@ class SearchPage extends React.Component {
               <input type="text" placeholder="Search by title or author" onChange={this.searchHandler} />
             </div>
           </div>
-          {
-
-          }
           <div className="search-books-results">
             <BookListComponent BookList={this.state.searchResult} Title={"Search Result for: " + this.state.query} ShelfHandler={this.updateShelfHandler}></BookListComponent>
           </div>
         </div>
       </div>
     )
-
-
   }
 }
 
