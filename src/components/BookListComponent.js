@@ -1,7 +1,6 @@
 import React from "react";
 import BookComponent from "./BookComponent"
 function BookListComponent(props) {
-
   if (props !== null && props !== undefined && props.BookList !== undefined) {
     return (
       <div className="bookshelf">
