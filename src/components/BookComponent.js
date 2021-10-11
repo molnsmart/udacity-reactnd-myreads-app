@@ -24,7 +24,7 @@ class BookComponent extends React.Component {
             </div>
           </div>
           <div className="book-title">{this.props.Title}</div>
-          <div className="book-authors">{this.props.Authors}</div>
+          <div className="book-authors">{Array.isArray(this.props.Authors) ? this.props.Authors.join(', ') : ''}</div>
         </div >
       )
     } else {
