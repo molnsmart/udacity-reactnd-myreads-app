@@ -25,7 +25,16 @@ class SearchPage extends React.Component {
 
   searchHandler = (event) => {
     let query = event.target.value
-    this.queryBookApi(query)
+    if (query === "") {
+      this.setState(
+        {
+          query: "",
+          searchResult: undefined,
+        }
+      )
+    } else {
+      this.queryBookApi(query)
+    }
 
   }
   updateShelfHandler = (event) => {
