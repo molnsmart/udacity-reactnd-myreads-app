@@ -1,8 +1,22 @@
 # MyReads Project
-
-This is a final assessment project for Udacity's React Fundamentals course.
+## Overview
+This is a final assessment project for Udacity's React Fundamentals course. The application is a simple "TODO" application where the user can move books in different states (Read, WantToRead or Currently Reading)
 <br>
+<br>
+Starter code included a singlePage mockup of the application and we had to implement code and logic. To prove our understanding of basic React States.
+<br><br>Some of the tasks included
+* create a mockup of components
+* read books from backend api
+* manage state
+* add/delete/toogle books
+* navigation
+<br>etc..
+
+## The app (Printscreen)
+
 ![alt text](react-myreads-sample.png)
+
+
 
 ## Run project
 
@@ -11,9 +25,10 @@ This is a final assessment project for Udacity's React Fundamentals course.
 * start the development server with `npm start`
 
 
-## Backend Server
+## Dependencies: Backend Server
 
-A remote backend Server is located at https://reactnd-books-api.udacity.com hosted by udacity.
+A remote backend Server is located at https://reactnd-books-api.udacity.com hosted by Udacity. You don´t need to do anything when you run the project with 'npm start', a temp userToken is auto-generated to get access to the API.
+
 
 
 [`BooksAPI.js`](src/BooksAPI.js) contains all functions needed for communicate with backend.
