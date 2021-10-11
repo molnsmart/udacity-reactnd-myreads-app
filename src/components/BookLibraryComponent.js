@@ -12,18 +12,17 @@ class BookLibraryComponent extends React.Component {
     read: undefined
   }
 
-  componentDidMount() {
-    BooksAPI.getAll()
-      .then(res => {
-        this.setState(
-          {
-            allBooks: res,
-            currentlyReading: res.filter(b => b.shelf === shelves.currentlyReading[1]),
-            wantToRead: res.filter(b => b.shelf === shelves.wantToRead[1]),
-            read: res.filter(b => b.shelf === shelves.read[1])
-          }
-        )
-      })
+  async componentDidMount() {
+    const books = await BooksAPI.getAll()
+    this.setState(
+      {
+        allBooks: books,
+        currentlyReading: books.filter(b => b.shelf === shelves.currentlyReading[1]),
+        wantToRead: books.filter(b => b.shelf === shelves.wantToRead[1]),
+        read: books.filter(b => b.shelf === shelves.read[1])
+      }
+    )
+
   }
 
   updateShelfHandler = (event) => {
