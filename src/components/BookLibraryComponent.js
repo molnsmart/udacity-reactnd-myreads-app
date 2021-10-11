@@ -2,7 +2,7 @@ import React from 'react'
 import * as BooksAPI from '../BooksAPI'
 import BookListComponent from './BookListComponent'
 import { Link } from 'react-router-dom'
-
+import { shelves } from './constants'
 class BookLibraryComponent extends React.Component {
 
   state = {
@@ -18,9 +18,9 @@ class BookLibraryComponent extends React.Component {
         this.setState(
           {
             allBooks: res,
-            currentlyReading: res.filter(b => b.shelf === 'currentlyReading'),
-            wantToRead: res.filter(b => b.shelf === 'wantToRead'),
-            read: res.filter(b => b.shelf === 'read')
+            currentlyReading: res.filter(b => b.shelf === shelves.currentlyReading[1]),
+            wantToRead: res.filter(b => b.shelf === shelves.wantToRead[1]),
+            read: res.filter(b => b.shelf === shelves.read[1])
           }
         )
       })
@@ -39,9 +39,9 @@ class BookLibraryComponent extends React.Component {
           this.setState(
             {
               allBooks: allBooks,
-              currentlyReading: allBooks.filter(b => b.shelf === 'currentlyReading'),
-              wantToRead: allBooks.filter(b => b.shelf === 'wantToRead'),
-              read: allBooks.filter(b => b.shelf === 'read')
+              currentlyReading: allBooks.filter(b => b.shelf === shelves.currentlyReading[1]),
+              wantToRead: allBooks.filter(b => b.shelf === shelves.wantToRead[1]),
+              read: allBooks.filter(b => b.shelf === shelves.read[1])
             }
           )
         } else {
@@ -74,9 +74,9 @@ class BookLibraryComponent extends React.Component {
           </div>
           <div className="list-books-content">
             <div>
-              <BookListComponent BookList={this.state.currentlyReading} Title="Currently Reading" ShelfHandler={this.updateShelfHandler}></BookListComponent>
-              <BookListComponent BookList={this.state.wantToRead} Title="Want To Read" ShelfHandler={this.updateShelfHandler}></BookListComponent>
-              <BookListComponent BookList={this.state.read} Title="Read" ShelfHandler={this.updateShelfHandler}></BookListComponent>
+              <BookListComponent BookList={this.state.currentlyReading} Title={shelves.currentlyReading[0]} ShelfHandler={this.updateShelfHandler}></BookListComponent>
+              <BookListComponent BookList={this.state.wantToRead} Title={shelves.wantToRead[0]} ShelfHandler={this.updateShelfHandler}></BookListComponent>
+              <BookListComponent BookList={this.state.read} Title={shelves.read[0]} ShelfHandler={this.updateShelfHandler}></BookListComponent>
             </div>
           </div>
         </div>
